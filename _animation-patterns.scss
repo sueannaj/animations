@@ -1,0 +1,239 @@
+/*****************************************************************************
+
+    Animation Patterns
+
+    Each section pertains to a commonly animated property and includes
+    keyframes for simple animations plus a mixin if you want to customize
+    an animation for that property.
+
+    When you include any of these mixins in your scss partial, you must
+    also create a list with value pairs. The pair values map to a keyframe
+    stop and its corresponding property value respectively.
+
+    e.g. If you wanted to animate an icon's opacity, you could create a
+    keyframe list like this:
+
+    $icon-keyframes: (0%, 0),(30%, .5),(100%, 1);
+
+    This list would go in your scss partial. You would then include the
+    opacity-animation mixin in the same file:
+
+    @include opacity-animation($icon-keyframes, icon-fancy-animation);
+
+    The last step is to add the animation property to your desired
+    declaration block:
+
+    .icon {
+        animation: icon-fancy-animation 2s;
+    }
+
+*****************************************************************************/
+
+/*****************************************************************************
+    Opacity
+*****************************************************************************/
+@keyframes opacity-0-1 {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes opacity-1-0 {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@mixin opacity-animation($list-name, $keyframes-name) {
+    @keyframes #{$keyframes-name} {
+        @each $list-stop, $list-value in ($list-name) {
+            #{$list-stop} {
+                opacity: $list-value;
+            }
+        }
+    }
+}
+
+
+/*****************************************************************************
+    Rotate
+*****************************************************************************/
+@keyframes rotate-0-360 {
+    0% {
+        transform: rotate3d(0, 0, 1, 0deg);
+    }
+
+    100% {
+        transform: rotate3d(0, 0, 1, 360deg);
+    }
+}
+
+@keyframes rotate-360-0 {
+    0% {
+        transform: rotate3d(0, 0, 1, 360deg);
+    }
+
+    100% {
+        transform: rotate3d(0, 0, 1, 0deg);
+    }
+}
+
+@mixin rotate-animation($list-name, $keyframes-name) {
+    @keyframes #{$keyframes-name} {
+        @each $list-stop, $list-value in ($list-name) {
+            #{$list-stop} {
+                transform: rotate3d(0, 0, 1, $list-value);
+            }
+        }
+    }
+}
+
+
+/*****************************************************************************
+    Scale
+*****************************************************************************/
+@keyframes scale-0-1 {
+    0% {
+        transform: scale3d(0, 0, 0);
+    }
+
+    100% {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes scale-1-0 {
+    0% {
+        transform: scale3d(1, 1, 1);
+    }
+
+    100% {
+        transform: scale3d(0, 0, 1);
+    }
+}
+
+@mixin scale-animation($list-name, $keyframes-name) {
+    @keyframes #{$keyframes-name} {
+        @each $list-stop, $list-value in ($list-name) {
+            #{$list-stop} {
+                transform: scale3d($list-value, $list-value, 1);
+            }
+        }
+    }
+}
+
+
+/*****************************************************************************
+    Translate X
+*****************************************************************************/
+@keyframes translate-x-0-100 {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(100%, 0, 0);
+    }
+}
+
+@keyframes translate-x-100_0 {
+    0% {
+        transform: translate3d(100%, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes translate-x-0-neg100 {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
+@keyframes translate-x-neg100-0 {
+    0% {
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@mixin translate-x-animation($list-name, $keyframes-name) {
+    @keyframes #{$keyframes-name} {
+        @each $list-stop, $list-value in ($list-name) {
+            #{$list-stop} {
+                transform: translate3d($list-value, 0, 0);
+            }
+        }
+    }
+}
+
+
+/*****************************************************************************
+    Translate Y
+*****************************************************************************/
+@keyframes translate-y-0-100 {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 100%, 0);
+    }
+}
+
+@keyframes translate-y-100-0 {
+    0% {
+        transform: translate3d(0, 100%, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes translate-y-0-neg100 {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(0, -100%, 0);
+    }
+}
+
+@keyframes translate-y-neg100-0 {
+    0% {
+        transform: translate3d(0, -100%, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@mixin translate-y-animation($list-name, $keyframes-name) {
+    @keyframes #{$keyframes-name} {
+        @each $list-stop, $list-value in ($list-name) {
+            #{$list-stop} {
+                transform: translate3d(0, $list-value, 0);
+            }
+        }
+    }
+}
